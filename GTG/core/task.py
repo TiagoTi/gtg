@@ -210,6 +210,16 @@ class Task(TreeNode):
             self.set_due_date(due_date)
             self.set_start_date(defer_date)
 
+    def toggle_status(self):
+        """Toggle between done and active."""
+
+        if self.status == self.STA_ACTIVE:
+            new_status = self.STA_DONE
+        else:
+            new_status = self.STA_ACTIVE
+
+        self.set_status(new_status)
+
     def set_status(self, status, donedate=None):
         old_status = self.status
         self.can_be_deleted = False

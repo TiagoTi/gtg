@@ -35,47 +35,59 @@ class SubTaskTag(Gtk.TextTag):
         super().__init__()
 
         self.tid = task.tid
+        # self.foreground = 'black'
 
-        self.set_property('background', 'white')
-        self.set_property('underline', Pango.Underline.SINGLE)
-        self.set_property('left-margin', 40)
+        self.set_property('background', 'red')
+        # self.connect('event', self.on_tag)
+        pass
 
-        if task.status == Task.STA_ACTIVE:
+
+    def refresh(self, status) -> None:
+
+        if status == Task.STA_ACTIVE:
+            self.foreground = 'black'
             self.set_property('strikethrough', False)
-            self.set_property('foreground', '#007bff')
         else:
+            self.foreground = 'grey'
             self.set_property('strikethrough', True)
-            self.set_property('foreground', 'gray')
 
-        self.connect('event', self.on_tag)
+        self.set_property('foreground', self.foreground)
 
 
     def on_tag(self, tag, view, event, _iter) -> None:
         """Callback for events that happen inside the tag."""
 
-        button = event.get_button()
+        # button = event.get_button()
 
-        # If there was a click...
-        if button[0] and button[1] == 1:
-            view.open_subtask_cb(self.tid)
+        # # If there was a click...
+        # if button[0] and button[1] == 1:
+        #     view.open_subtask_cb(self.tid)
+        pass
 
 
     def activate(self, view) -> None:
         """Open the link in this tag."""
 
-        view.open_subtask(self.tid)
+        # view.open_subtask(self.tid)
+        pass
 
 
     def set_hover(self) -> None:
         """Change tag appareance when hovering."""
 
-        self.set_property('background', 'light gray')
+        # self.set_property('background', 'light gray')
+        # self.set_property('underline', Pango.Underline.SINGLE)
+        # self.set_property('foreground', '#007bff')
+        pass
 
 
     def reset(self) -> None:
         """Reset tag appareance when not hovering."""
 
-        self.set_property('background', 'white')
+        # self.set_property('foreground', self.foreground)
+        # self.set_property('background', 'white')
+        # self.set_property('underline', Pango.Underline.NONE)
+        pass
 
 
 class InvisibleTag(Gtk.TextTag):
@@ -112,7 +124,7 @@ class InternalLinkTag(Gtk.TextTag):
 
         self.tid = task.tid
 
-        self.set_property('background', 'white')
+        # self.set_property('background', 'white')
         self.set_property('underline', Pango.Underline.SINGLE)
 
         if task.status == Task.STA_ACTIVE:
